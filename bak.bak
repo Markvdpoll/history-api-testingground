@@ -1,0 +1,71 @@
+<?php
+
+
+   header('Content-Type: text/plain');
+
+
+
+#$invoicedate = date_create('0000-00-00');
+
+#$invoicedate = "0000-10-10";
+
+function validateDate($date, $format = 'd-m-Y')
+{
+	if (preg_match("/^(0[1-9]|[1-2][0-9]|3[0-1])-(0[1-9]|1[0-2])-[0-9]{4}$/",$date))
+	{
+	$date = trim($date);
+		$d = DateTime::createFromFormat($format, $date);
+	
+		$day = $d->format('d');
+		$month = $d->format('m');
+	        $year = $d->format('Y');
+	
+		if (checkdate($month, $day, $year) && $year >= 2011){ 	
+		 
+			return $d && $d->format($format) == $date;
+		}
+		else {
+			return false; 
+		}
+	}	
+	else {
+		return false;
+	}
+}
+
+
+$date = '16-05-2011';
+if (validateDate($date) === true) {
+	echo "$date is a valid date";
+}
+else {
+	echo "$date is not a valid date";
+
+}
+
+
+
+
+
+
+/**
+$time = '1990-10-10';
+#$timezone = 'UTC';
+$invoicedate = date_create_from_format('Y-m-j', $time);
+var_dump($invoicedate);
+#$invoicedate = strtotime(1995-10-15);
+#$invoicedate = date('Y-m-d', $invoicedate);
+
+
+#$invoicedate = date_format($invoicedate, 'Y-m-d');
+
+if (checkdate($invoicedate) === 1) {
+echo "true<br><br>"; 
+echo $invoicedate;
+#var_dump($invoicedate);
+} else {
+echo "false<br><br>";
+#var_dump($invoicedate);
+}
+**/
+?>
